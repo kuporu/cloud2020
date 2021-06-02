@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 // @RestController 和 @Controller
 // https://www.cnblogs.com/shuaifing/p/8119664.html
@@ -49,6 +50,17 @@ public class PaymentController {
 
     @GetMapping(value = "/payment/lb")
     public String getPaymentLB() {
+        return serverPort;
+    }
+
+    @GetMapping(value = "/payment/feign/timeout")
+    public String getTimeout() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         return serverPort;
     }
 }
